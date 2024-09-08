@@ -7,7 +7,7 @@ public class Flight04 : MonoBehaviour
     public float forwardSpeed = 25f;
     public float strafeSpeed = 7.5f;
     public float hoverSpeed = 5f;
-    public Vector2 moveInput;
+    public Vector3 moveInput;
 
     public float activeForwardSpeed, activeStrafeSpeed, activeHoverSpeed;
     public float forwardAcc = 2.5f;
@@ -37,6 +37,8 @@ public class Flight04 : MonoBehaviour
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
         moveInput.y = Input.GetAxis("Vertical");
+        moveInput.x = Input.GetAxis("Horizontal");
+        moveInput.z = Input.GetAxis("Roll");
     }
     private void FixedUpdate()
     {
@@ -44,10 +46,10 @@ public class Flight04 : MonoBehaviour
     }
     public void Movement()
     {
-        mouseDistance.x = (lookInput.x - screenCenter.x);
-        mouseDistance.y = (lookInput.y - screenCenter.y);
+        mouseDistance.x = (lookInput.x - screenCenter.x) / (screenCenter.x);
+        mouseDistance.y = (lookInput.y - screenCenter.y) / (screenCenter.y);
 
-        if (Mathf.Abs(mouseDistance.x) < 100f)
+        /*if (Mathf.Abs(mouseDistance.x) < 100f)
         {
             mouseDistance.x = 0f;
         }
@@ -62,11 +64,11 @@ public class Flight04 : MonoBehaviour
         else
         {
             mouseDistance.y = (lookInput.y - screenCenter.y) / (screenCenter.y * 2);
-        }
+        }*/
 
         mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
         transform.Rotate(-mouseDistance.y * lookRateSpeed * Time.deltaTime, mouseDistance.x * lookRateSpeed * Time.deltaTime, rollInput * rollSpeed * Time.deltaTime, Space.Self);
-        model.transform.localPosition = new Vector3(-mouseDistance.x * 5f, mouseDistance.y * 0.6f, 0f);
+        model.transform.localPosition = new Vector3(-mouseDistance.x * 0.5f, mouseDistance.y * 0.1f, 0f);
 
         forwardInput = Mathf.Clamp(moveInput.y, 0, 1f);
         activeForwardSpeed = Mathf.Lerp(activeForwardSpeed, forwardInput * forwardSpeed, forwardAcc * Time.deltaTime);
