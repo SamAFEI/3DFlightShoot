@@ -62,7 +62,7 @@ public class ObstacleAvoidance : BTNode
             }
         }
         Vector3 agentPosition = agentTransform.position;
-        Vector3 targetPosition = AI.GetTargetPosition();
+        Vector3 targetPosition = AI.GetMoveTargetPosition();
         Vector3 desiredHeading = (targetPosition - agentPosition);
         if (TurnEvent != null)
         {

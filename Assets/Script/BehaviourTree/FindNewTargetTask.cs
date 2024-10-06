@@ -19,7 +19,7 @@ public class FindNewTargetTask : BTNode
         if (targets.Count > 0)
         {
             int randomChoice = Random.Range(0, targets.Count);
-            AI.SetTarget(targets[randomChoice]);
+            AI.SetMoveTarget(targets[randomChoice]);
             return BTNodeStates.SUCCESS;
         }
         return BTNodeStates.FAILURE;

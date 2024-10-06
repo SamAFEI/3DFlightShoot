@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // This scripts allows a "player" to fire and aim turrets
-public class BL_PlayerDemo : MonoBehaviour {
+public class BL_PlayerDemo : MonoBehaviour
+{
 
     // Use a custom texture for aiming instead of the normal pointer arrow
     public Texture2D cursorTexture;
@@ -18,7 +17,8 @@ public class BL_PlayerDemo : MonoBehaviour {
     // Auto find all turrets in scene true/false
     public bool autoControlAllTurrets = true;
 
-	void Start () {
+    void Start()
+    {
         // If enabled, find all Turrets in scene
         if (autoControlAllTurrets)
         {
@@ -29,8 +29,9 @@ public class BL_PlayerDemo : MonoBehaviour {
         // Set the custom cursor
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
-	
-	void Update () {
+
+    void Update()
+    {
         if (Input.GetButton("Fire1"))
         {
             // When fire button is pressed, loop through all player controlled turrets
@@ -46,12 +47,12 @@ public class BL_PlayerDemo : MonoBehaviour {
                     // Fire with round robin disabled (play ony one sound repeat even if array contains multiple sounds)
                     _t.Fire(false);
                 }
-                
+
             }
         }
 
         // Perform a raycast hit for aiming - use the mouse position of the screen as a target to the ray cast from the camera
-        RaycastHit _hit;      
+        RaycastHit _hit;
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(_ray, out _hit, 4000))
@@ -63,7 +64,7 @@ public class BL_PlayerDemo : MonoBehaviour {
                 // Note: if this doesn't work for you, it's likely because there is no object within the defined distance of the raycast
                 // In the demo there is a distant verticle wall to provide a raycast hit. You can also use hidden colliders.
                 _t.Aim(_hit.point);
-            }            
+            }
         }
 
     }

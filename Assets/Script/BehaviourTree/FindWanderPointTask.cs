@@ -10,10 +10,11 @@ public class FindWanderPointTask : BTNode
         AI = _AI;
         range = _range;
     }
+
     public override BTNodeStates Evaluate()
     {
-        AI.SetTarget(null);
-        AI.SetTargetPosition(Random.insideUnitSphere * range);
+        AI.SetMoveTarget(null);
+        AI.SetMoveTargetPosition(GameManager.GetPlayerPosition() + Random.insideUnitSphere * range);
         return BTNodeStates.SUCCESS;
     }
 }

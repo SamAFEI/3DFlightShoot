@@ -88,7 +88,6 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, CursorLayerMask))
         {
             targetVector = hit.point;
-            Debug.Log(hit.transform.gameObject.name);
         }
         return targetVector;
     }

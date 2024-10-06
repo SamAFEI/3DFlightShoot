@@ -17,7 +17,7 @@ public class TurnToTargetTask : BTNode
     public override BTNodeStates Evaluate()
     {
         Vector3 agentPosition = AI.GetAgentTransform().position;
-        Vector3 targetPosition = AI.GetTargetPosition();
+        Vector3 targetPosition = AI.GetMoveTargetPosition();
         Vector3 desiredHeading = (targetPosition - agentPosition);
         if (TurnEvent != null)
         {

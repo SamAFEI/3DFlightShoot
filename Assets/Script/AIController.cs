@@ -13,7 +13,8 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     public event InputEventVector3 Fire01Event;
     public event InputEventVector3 Fire02Event;
 
-    public Vector3 TargetPos = Vector3.zero;
+    public Vector3 MoveTargetPos = Vector3.zero;
+    public Vector3 FireTargetPos = Vector3.zero;
 
     //Behaviors
     public Selector rootAI;
@@ -21,6 +22,7 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     public Sequence MoveSquence;
     public Sequence DecideToAttack;
     public Selector SelectTargetType;
+    public Sequence attackAI;
     public bool avoiding;
     public float avoidDistance = 100f;
     public LayerMask avoidLayerMask;
@@ -28,31 +30,32 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     public Vector3 savedTargetPosition;
 
     GameObject target = null;
+    public LayerMask enemyFactionLayerMask;
     public string enemyFaction = "PlayerFaction";
 
     private void Start()
     {
         DecideToAttack = new Sequence(new List<BTNode>
         {
-            new RandomChanceConditionalTask(1, 100, 10),
+            new RandomChanceConditionalTask(1, 100, 50),
             new FindNewTargetTask(this, enemyFaction)
         });
         SelectTargetType = new Selector(new List<BTNode>
         {
             DecideToAttack,
-            new FindWanderPointTask(this, 50f)
+            new FindWanderPointTask(this, 20f)
         });
         CheckArrivalSeqence = new Sequence(new List<BTNode>
         {
-            new CheckArrivealTask(this, 20f),
+            new CheckArrivealTask(this, 10f),
             SelectTargetType
         });
         MoveSquence = new Sequence(new List<BTNode>
         {
             new ObstacleAvoidance(this, avoidDistance, TurnEvent, avoidLayerMask),
             new MoveToTargetTask(this, 1f, ForwardEvent),
-            new IsTargetVisible(this),  
-            new FireWeaponTask(this, Fire01Event)
+            //new IsTargetVisible(this),  
+            //new FireWeaponTask(this, Fire01Event)
         });
         rootAI = new Selector(new List<BTNode>
         {
@@ -60,23 +63,24 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
             MoveSquence
         });
 
-        new FindWanderPointTask(this, 50f).Evaluate();
+        attackAI = new Sequence(new List<BTNode>
+        {
+            new IsEnemyInView(this, enemyFactionLayerMask),
+            new FireWeaponTask(this, Fire01Event)
+        });
+
+        new FindWanderPointTask(this, 10f).Evaluate();
     }
 
     private void Update()
     {
         rootAI.Evaluate();
+        attackAI.Evaluate();
     }
 
-    public Vector3 SetTargetPosition(Vector3 targetPosition)
+    public Transform GetTransform()
     {
-        TargetPos = targetPosition;
-        return TargetPos;
-    }
-
-    public Vector3 GetTargetPosition()
-    {
-        return TargetPos;
+        return gameObject.transform;
     }
 
     public Transform GetAgentTransform()
@@ -84,21 +88,27 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
         return transform;
     }
 
-    public GameObject SetTarget(GameObject newTarget)
+    public Vector3 SetMoveTargetPosition(Vector3 targetPosition)
+    {
+        MoveTargetPos = targetPosition;
+        return MoveTargetPos;
+    }
+
+    public Vector3 GetMoveTargetPosition()
+    {
+        return MoveTargetPos;
+    }
+
+    public GameObject SetMoveTarget(GameObject newTarget)
     {
         target = newTarget;
-        if (target != null) { TargetPos = target.transform.position; }
+        if (target != null) { MoveTargetPos = target.transform.position; }
         return target;
     }
 
-    public GameObject GetTarget()
+    public GameObject GetMoveTarget()
     {
         return target;
-    }
-
-    public Transform GetTransform()
-    {
-        return gameObject.transform;
     }
 
     public bool GetAvoidingFlag()
@@ -110,7 +120,7 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     {
         avoiding = true;
         temporaryTarget = postion;
-        savedTargetPosition = TargetPos;
+        savedTargetPosition = MoveTargetPos;
         return postion;
     }
 
@@ -118,7 +128,18 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     {
         avoiding = false;
         temporaryTarget = Vector3.zero;
-        TargetPos = savedTargetPosition;
-        return TargetPos;
+        MoveTargetPos = savedTargetPosition;
+        return MoveTargetPos;
+    }
+
+    public Vector3 GetFireTargetPosition()
+    {
+        return FireTargetPos;
+    }
+
+    public Vector3 SetFireTargetPosition(Vector3 targetPosition)
+    {
+        FireTargetPos = targetPosition;
+        return FireTargetPos;
     }
 }

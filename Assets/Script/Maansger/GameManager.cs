@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameObject playerObj { get; private set; }
-    public Player player { get; private set; }
 
     private void Awake()
     {
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             //DontDestroyOnLoad(this.gameObject);
+            playerObj = GameObject.FindAnyObjectByType<PlayerInput>().gameObject;
         }
         else if (this != Instance)
         {
@@ -21,13 +21,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        playerObj = GameObject.Find("Player");
-        if (playerObj != null) { player = playerObj.GetComponent<Player>(); }
-    }
-
     #region About Player
+
+    public static Vector3 GetPlayerPosition()
+    {
+        if (Instance.playerObj == null) { return Vector3.zero; }
+        return Instance.playerObj.transform.position;
+    }
 
     /// <summary>
     /// Get 朝Player方向向量
@@ -38,6 +38,18 @@ public class GameManager : MonoBehaviour
     {
         if (Instance.playerObj == null) { return Vector3.zero; }
         return Instance.playerObj.transform.position - _position;
+    }
+
+    /// <summary>
+    /// Get 與Player的距離
+    /// </summary>
+    /// <param name="_position"></param>
+    /// <returns></returns>
+    public static float GetPlayerDistance(Vector3 _position)
+    {
+        if (Instance.playerObj == null) { return 0; }
+        return GetPlayerDirection(_position).magnitude;
+
     }
     #endregion
 }

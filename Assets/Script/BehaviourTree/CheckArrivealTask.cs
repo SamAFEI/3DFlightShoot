@@ -13,7 +13,7 @@ public class CheckArrivealTask : BTNode
     public override BTNodeStates Evaluate()
     {
         Vector3 agentPosition = AI.GetAgentTransform().position;
-        Vector3 targetPosition = AI.GetTargetPosition();
+        Vector3 targetPosition = AI.GetMoveTargetPosition();
         float distance = Vector3.Distance(agentPosition, targetPosition);
         if (distance < closeDistance)
         {

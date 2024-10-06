@@ -1,27 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ordinance : MonoBehaviour
 {
     public string ordinanceName = "MGBullet";
-    public float muzzleVelocity = 300f;
+    public float muzzleVelocity = 200f;
     public float armorDamage = 100f;
     public float shieldDamage = 50f;
-    public GameObject explosion;
+    public GameObject impact;
+    public AudioClip sfxImpact;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Explode();    
+        other.transform.root.SendMessage("Hurt", armorDamage, SendMessageOptions.DontRequireReceiver);
+        Explode();
     }
 
     private void Explode()
     {
-        if (explosion != null)
+        if (impact != null)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            GameObject _impact = Instantiate(impact, transform.position, Quaternion.identity);
+            _impact.transform.forward = -transform.forward;
+            Destroy(_impact, 1f);
+            if (sfxImpact != null)
+            {
+                AudioSource.PlayClipAtPoint(sfxImpact, transform.position);
+            }
         }
-        //Destroy(gameObject, .05f);
+        Destroy(gameObject, .05f);
     }
 }

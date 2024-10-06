@@ -13,7 +13,7 @@ public class FireWeaponTask : BTNode
     {
         if (fireWeaponEvent != null)
         {
-            fireWeaponEvent(AI.GetTargetPosition());
+            fireWeaponEvent(AI.GetFireTargetPosition());
             return BTNodeStates.SUCCESS;
         }
         return BTNodeStates.FAILURE;
