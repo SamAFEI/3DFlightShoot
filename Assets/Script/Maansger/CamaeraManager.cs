@@ -25,7 +25,11 @@ public class CamaeraManager : MonoBehaviour
         firstCamera = transform.Find("FirstCamera").GetComponent<CinemachineVirtualCamera>();
         secondCamera = transform.Find("SecondCamera").GetComponent<CinemachineVirtualCamera>();
         thirdCamera = transform.Find("ThirdCamera").GetComponent<CinemachineVirtualCamera>();
-        activeCamera = cinemachineBrain.ActiveVirtualCamera as CinemachineVirtualCamera;
+    }
+
+    private void Start()
+    {
+        SetActiveCamera();
     }
 
     private void Update()
@@ -51,23 +55,23 @@ public class CamaeraManager : MonoBehaviour
         if (_index == 1)
         {
             firstCamera.Priority = 11;
-            SetActiveCamera(firstCamera);
         }
         else if (_index == 2)
         {
             secondCamera.Priority = 11;
-            SetActiveCamera(secondCamera);
         }
         else if (_index == 3)
         {
             thirdCamera.Priority = 11;
-            SetActiveCamera(thirdCamera);
         }
+        SetActiveCamera();
     }
-    public void SetActiveCamera(CinemachineVirtualCamera camera)
+    public void SetActiveCamera()
     {
-        activeCamera = camera;
+        activeCamera = cinemachineBrain.ActiveVirtualCamera as CinemachineVirtualCamera;
         cbmPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cbmPerlin.m_AmplitudeGain = 0f;
+        cbmPerlin.m_FrequencyGain = 0f;
     }
 
     #region ShakeCamera
@@ -86,8 +90,7 @@ public class CamaeraManager : MonoBehaviour
     {
         if (shakeTimer > 0)
         {
-            //SetActiveCamera(cinemachineBrain.ActiveVirtualCamera as CinemachineVirtualCamera);
-            SetActiveCamera(thirdCamera);
+            SetActiveCamera();
             shakeTimer -= Time.deltaTime;
             if (shakeTimer <= 0)
             {

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using UnityEngine.UI;
 
 public class IsEnemyInView : BTNode
 {
@@ -24,10 +22,10 @@ public class IsEnemyInView : BTNode
         foreach (Collider collider in spottedEnemies)
         {
             Vector3 target = collider.transform.position - agentTransform.position;
-            if (Vector3.Angle(agentTransform.forward, target) <= 30f )
+            if (Vector3.Angle(agentTransform.forward, target) <= 30f)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(agentTransform.position, target, out hit, enemyDistance) 
+                if (Physics.Raycast(agentTransform.position, target, out hit, enemyDistance)
                     && (enemyFactionLayerMask & (1 << hit.transform.root.gameObject.layer)) != 0)
                 {
                     AI.SetFireTargetPosition(hit.point);

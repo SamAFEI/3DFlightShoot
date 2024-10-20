@@ -43,17 +43,17 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
         SelectTargetType = new Selector(new List<BTNode>
         {
             DecideToAttack,
-            new FindWanderPointTask(this, 20f)
+            new FindWanderPointTask(this, 200f)
         });
         CheckArrivalSeqence = new Sequence(new List<BTNode>
         {
-            new CheckArrivealTask(this, 10f),
+            new CheckArrivealTask(this, 80f),
             SelectTargetType
         });
         MoveSquence = new Sequence(new List<BTNode>
         {
             new ObstacleAvoidance(this, avoidDistance, TurnEvent, avoidLayerMask),
-            new MoveToTargetTask(this, 1f, ForwardEvent),
+            new MoveToTargetTask(this, 40f, ForwardEvent),
             //new IsTargetVisible(this),  
             //new FireWeaponTask(this, Fire01Event)
         });
@@ -69,7 +69,7 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
             new FireWeaponTask(this, Fire01Event)
         });
 
-        new FindWanderPointTask(this, 10f).Evaluate();
+        new FindWanderPointTask(this, 200f).Evaluate();
     }
 
     private void Update()

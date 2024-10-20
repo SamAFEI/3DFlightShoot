@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleAvoidance : BTNode
@@ -42,13 +42,17 @@ public class ObstacleAvoidance : BTNode
             (-agentTransform.forward).normalized,
         };
         DrawRay(rayDirections);
-
+        //待優化
         RaycastHit hit;
         if ((Physics.Raycast(agentTransform.position, rayDirections[0], out hit, avoidDistance, avoidLayerMask) ||
             Physics.Raycast(agentTransform.position, rayDirections[1], out hit, avoidDistance, avoidLayerMask) ||
             Physics.Raycast(agentTransform.position, rayDirections[2], out hit, avoidDistance, avoidLayerMask) ||
             Physics.Raycast(agentTransform.position, rayDirections[3], out hit, avoidDistance, avoidLayerMask) ||
-            Physics.Raycast(agentTransform.position, rayDirections[4], out hit, avoidDistance, avoidLayerMask)) && 
+            Physics.Raycast(agentTransform.position, rayDirections[4], out hit, avoidDistance, avoidLayerMask) ||
+            Physics.Raycast(agentTransform.position, rayDirections[5], out hit, avoidDistance, avoidLayerMask) ||
+            Physics.Raycast(agentTransform.position, rayDirections[6], out hit, avoidDistance, avoidLayerMask) ||
+            Physics.Raycast(agentTransform.position, rayDirections[7], out hit, avoidDistance, avoidLayerMask) ||
+            Physics.Raycast(agentTransform.position, rayDirections[8], out hit, avoidDistance, avoidLayerMask)) && 
             hit.transform.root.gameObject != agentTransform.root.gameObject)
         {
             List<Vector3> avoidpaths = RondomList(rayDirections);
@@ -66,7 +70,7 @@ public class ObstacleAvoidance : BTNode
         Vector3 desiredHeading = (targetPosition - agentPosition);
         if (TurnEvent != null)
         {
-            if (Vector3.Angle(agentPosition, desiredHeading) > 10)
+            if (Vector3.Angle(agentTransform.forward, desiredHeading) > 10)
             {
                 TurnEvent(desiredHeading);
             }

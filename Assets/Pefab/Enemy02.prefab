@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1081345681842845070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -84,7 +84,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -96,9 +96,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.30980393, b: 1, a: 0}
-      key1: {r: 0, g: 0.3098545, b: 1, a: 1}
-      key2: {r: 0, g: 0.30980393, b: 1, a: 1}
+      key0: {r: 0.9176471, g: 0, b: 0.41960788, a: 0}
+      key1: {r: 0.9294118, g: 0, b: 0.46274513, a: 1}
+      key2: {r: 0.9176471, g: 0, b: 0.4156863, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -521,7 +521,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5, y: 0.28, z: 7.04}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1148196547206188768}
@@ -573,11 +573,11 @@ MonoBehaviour:
   explosionPerfab: {fileID: 1036410813808012, guid: 1cfa6580d1044aa4788b401d55fd383f,
     type: 3}
   isPlayer: 0
-  maxHp: 500
-  forwardThrustPower: 40
-  yawSpeed: 30
-  pitchSpeed: 30
-  rollSpeed: 10
+  maxHp: 2000
+  forwardThrustPower: 1000
+  yawSpeed: 50
+  pitchSpeed: 50
+  rollSpeed: 50
 --- !u!114 &3026502134741098327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   MoveTargetPos: {x: 0, y: 0, z: 0}
   FireTargetPos: {x: 0, y: 0, z: 0}
   avoiding: 0
-  avoidDistance: 200
+  avoidDistance: 100
   avoidLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: MGGun
-  shotsPerSecond: 1
-  ordinancePrefab: {fileID: 1310470818994258064, guid: 12887d2cc045ec5489d814e2da3219d0,
+  shotsPerSecond: 2
+  ordinancePrefab: {fileID: 1310470818994258064, guid: 576242429da410c49a5c7563ec22b1ec,
     type: 3}
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
@@ -715,7 +715,6 @@ GameObject:
   - component: {fileID: 7897481870266356153}
   - component: {fileID: 8069419605868002417}
   - component: {fileID: 1803120269825650517}
-  - component: {fileID: 1929579263034252828}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -805,29 +804,8 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -345278128870426482, guid: 290f38109bed03341bafe9814594a47a, type: 3}
---- !u!65 &1929579263034252828
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8464257901045376237}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 3, z: 10}
-  m_Center: {x: 0, y: 0, z: -1.2}

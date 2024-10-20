@@ -18,7 +18,7 @@ public class MoveToTargetTask : BTNode
         Vector3 agentPosition = AI.GetAgentTransform().position;
         Vector3 targetPosition = AI.GetMoveTargetPosition();
         float distance = Vector3.Distance(agentPosition, targetPosition);
-        float thrust = Mathf.Clamp(distance / range, 30f, 50f);
+        float thrust = Mathf.Clamp(distance / range, 1f, 4f);
         if (ForwardEvent != null)
         {
             ForwardEvent(thrust);

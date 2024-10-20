@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 // Demo script that alters between different blasters
-public class BL_Demo : MonoBehaviour {
+public class BL_Demo : MonoBehaviour
+{
 
     // Array of predefined rates of fire
-    public int[] altRateOfFire = new int[] { 60, 120, 240, 480, 960 };    
+    public int[] altRateOfFire = new int[] { 60, 120, 240, 480, 960 };
     public int currentRateOfFire = 2;
 
     // Array of predefined bullet velocities
     public float[] altVelocity = new float[] { 50, 100, 200, 400, 800, 1600 };
-    public int currentVelocity = 3 ;
+    public int currentVelocity = 3;
 
     // Array of bullet types (prefabs)
     public GameObject[] altBulletType;
@@ -21,7 +20,7 @@ public class BL_Demo : MonoBehaviour {
     // Array of impact types (prefabs)
     public GameObject[] altImpactType;
     public int currentImpactType;
-    
+
     // Array of muzzle flash typues (prefab )
     public GameObject[] altMuzzleFlashType;
     public int currentMuzzleFlashType;
@@ -51,27 +50,29 @@ public class BL_Demo : MonoBehaviour {
     private BL_Turret[] _turrets;
 
     // Use this for initialization
-    void Start () {        
+    void Start()
+    {
         // Find all the turrets in the scene
         _turrets = GameObject.FindObjectsOfType<BL_Turret>();
 
         // Update the turret settings based on settings in this script and update UI
         Refresh(true);
     }
-		
-	void Update () {
+
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.W))
         {
             // Pressing W key increases the rate of fire (select next rate from the array of predefined rates)
             currentRateOfFire++;
-            if (currentRateOfFire >= altRateOfFire.Length) currentRateOfFire = altRateOfFire.Length - 1;                        
+            if (currentRateOfFire >= altRateOfFire.Length) currentRateOfFire = altRateOfFire.Length - 1;
             Refresh();
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // Pressing Q key decreases the rate of fire (select previous rate from the array of predefined rates)
             currentRateOfFire--;
-            if (currentRateOfFire < 0) currentRateOfFire = 0;            
+            if (currentRateOfFire < 0) currentRateOfFire = 0;
             Refresh();
         }
 
@@ -96,10 +97,10 @@ public class BL_Demo : MonoBehaviour {
             currentSFX++;
             if (currentSFX >= altSFX.Length) currentSFX = altSFX.Length - 1;
             // Bullet type is also changed
-            currentBulletType++;            
+            currentBulletType++;
             if (currentBulletType >= altBulletType.Length) currentBulletType = 0;
             // ...and so is Impact Type
-            currentImpactType++;            
+            currentImpactType++;
             if (currentImpactType >= altImpactType.Length) currentImpactType = 0;
             // ..and Muzzle Flash type
             currentMuzzleFlashType++;
@@ -117,7 +118,7 @@ public class BL_Demo : MonoBehaviour {
             if (currentBulletType < 0) currentBulletType = altBulletType.Length - 1;
             // ...and so is Impact Type
             currentImpactType--;
-            if (currentImpactType < 0) currentImpactType = altImpactType.Length -1;
+            if (currentImpactType < 0) currentImpactType = altImpactType.Length - 1;
             // ..and Muzzle Flash type
             currentMuzzleFlashType--;
             if (currentMuzzleFlashType < 0) currentMuzzleFlashType = altMuzzleFlashType.Length - 1;
@@ -195,7 +196,7 @@ public class BL_Demo : MonoBehaviour {
             // Set the new sound effect (this only sets the first effect in the array as we are not using round robin in this demo
             if (_t.sfxFire.Length > 0) _t.sfxFire[0] = altSFX[currentSFX];
         }
-        
+
         // Update UI with new settings
         uiRateOfFire.text = "Q/W RATE OF FIRE: " + altRateOfFire[currentRateOfFire];
         uiVelocity.text = "A/S VELOCITY: " + altVelocity[currentVelocity];

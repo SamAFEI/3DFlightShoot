@@ -44,3 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ab151af79a3f5408d86865ba172254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyFactions: []
+  playerFactions: []
+  enemyFactionLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  playerFactionLayerMask:
+    serializedVersion: 2
+    m_Bits: 256

@@ -9,15 +9,16 @@ public class ShipController : MonoBehaviour
     public Transform ModelTransform { get; private set; }
     public List<Weapon> Weapons { get; private set; } = new List<Weapon>();
     public int CurrentHp { get; set; }
+    public bool IsDie { get { return CurrentHp <= 0; } }
 
     public UI_ShipStatus uiShipStatus;
     public GameObject explosionPerfab;
     public bool isPlayer;
-    public int maxHp = 1000;
-    public float forwardThrustPower = 250f;
-    public float yawSpeed = 30f;
-    public float pitchSpeed = 30f;
-    public float rollSpeed = 10f;
+    public int maxHp = 500;
+    public float forwardThrustPower = 2000f;
+    public float yawSpeed = 500f;
+    public float pitchSpeed = 300f;
+    public float rollSpeed = 500f;
 
     private void Awake()
     {
@@ -39,12 +40,18 @@ public class ShipController : MonoBehaviour
         isPlayer = GetComponent<PlayerInput>() != null;
     }
 
+    private void Start()
+    {
+        GameManager.AddShipList(this.gameObject);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        
         RB.velocity = Vector3.zero;
         Vector3 vector = transform.position - collision.collider.ClosestPoint(transform.position);
         vector = vector.normalized;
-        RB.AddForce(vector * 50f, ForceMode.Impulse);
+        RB.AddForce(vector * RB.mass * 100f, ForceMode.Impulse);
     }
 
     #region Movement
@@ -65,7 +72,7 @@ public class ShipController : MonoBehaviour
     private void YawMovement(float yaw)
     {
         RB.AddTorque(transform.up * yaw * yawSpeed * Time.deltaTime);
-        SetModelOffsetPosition(-yaw * 3f);
+        SetModelOffsetPosition(-yaw * 6f);
     }
     private void PitchMovement(float pitch)
     {
@@ -94,7 +101,6 @@ public class ShipController : MonoBehaviour
             }
         }
     }
-
     private void SetModelOffsetPosition(float power)
     {
         float ModelPosX = Mathf.Lerp(ModelTransform.localPosition.x, power * .5f, Time.deltaTime);
@@ -105,7 +111,6 @@ public class ShipController : MonoBehaviour
         float roll = Mathf.Lerp(0, 20, Mathf.Abs(power)) * -Mathf.Sin(power);
         ModelTransform.localRotation = Quaternion.Euler(Vector3.up + Vector3.right + Vector3.forward * roll);
     }
-
     private float GetAngleOnPlane(Vector3 from, Vector3 to, Vector3 planeNormal, Vector3 toOrientation)
     {
         Vector3 vector = Vector3.ProjectOnPlane(from - to, planeNormal);
@@ -113,17 +118,20 @@ public class ShipController : MonoBehaviour
         return angle;
     }
 
-    public void Hurt(float damage)
+    public void Hurt(Ordinance bullet)
     {
-        CurrentHp = (int)Mathf.Clamp(CurrentHp - damage, 0, maxHp);
+        CurrentHp = (int)Mathf.Clamp(CurrentHp - bullet.armorDamage, 0, maxHp);
         uiShipStatus.DoLerpHealth();
-        if (isPlayer) { CamaeraManager.Shake(3f, .5f); }
-        if (CurrentHp <= 0)
+        if (isPlayer) { CamaeraManager.Shake(8f, .5f); }
+        if (IsDie)
         {
+            if (bullet.parentObj == GameManager.Instance.playerObj)
+            {
+                GameManager.UpdateKills();
+            }
             Explosion();
         }
     }
-
     public void Explosion()
     {
         if (explosionPerfab != null)
@@ -131,6 +139,12 @@ public class ShipController : MonoBehaviour
             GameObject _explosion = Instantiate(explosionPerfab, transform.position, Quaternion.identity);
             Destroy(_explosion, 5f);
         }
-        Destroy(gameObject);
+        GameManager.RemoveShipList(this.gameObject);
+        gameObject.SetActive(false);
+        Destroy(gameObject, 1f);
+    }
+
+    private void OnDestroy()
+    {
     }
 }

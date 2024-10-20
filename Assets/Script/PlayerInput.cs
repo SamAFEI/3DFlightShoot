@@ -1,8 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour, IControllerInput
 {
+    public ShipController ShipController { get; private set; }
     public event InputEventFloat ForwardEvent;
     public event InputEventFloat HorizontalStrafeEvent;
     public event InputEventFloat VerticalStrafeEvent;
@@ -14,11 +14,15 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     public event InputEventVector3 TurnEvent;
 
     public LayerMask CursorLayerMask;
-    public float deadZoneRadius = .1f;
+    public float deadZoneRadius = 1f;
     public float invertModifier = -1f;
-
+    private void Awake()
+    {
+        ShipController = GetComponent<ShipController>();
+    }
     void Update()
     {
+        if (ShipController.IsDie) { return; }
         GetKeyboardInput();
         GetMouseInput();
     }
@@ -27,6 +31,10 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     {
         if (ForwardEvent != null)
         {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                ForwardEvent(3);
+            }
             if (Input.GetAxis("Vertical") != 0)
             {
                 ForwardEvent(Input.GetAxis("Vertical"));

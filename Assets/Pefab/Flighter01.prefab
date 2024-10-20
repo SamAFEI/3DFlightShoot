@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: MGGun
-  shotsPerSecond: 2
-  ordinancePrefab: {fileID: 1310470818994258064, guid: 576242429da410c49a5c7563ec22b1ec,
+  shotsPerSecond: 3
+  ordinancePrefab: {fileID: 1310470818994258064, guid: 12887d2cc045ec5489d814e2da3219d0,
     type: 3}
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
@@ -301,7 +301,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685581135413867944}
-  m_Mesh: {fileID: 5060444177187149915, guid: 4e52b966203591744ab03512ffca043c, type: 3}
+  m_Mesh: {fileID: 644578850837273861, guid: 80c745e1d59f06c408cb5f45b5067acc, type: 3}
 --- !u!23 &2906796094958510561
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 273c589cdaeec164f9245759a82f2143, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,7 +365,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 5060444177187149915, guid: 4e52b966203591744ab03512ffca043c, type: 3}
+  m_Mesh: {fileID: 644578850837273861, guid: 80c745e1d59f06c408cb5f45b5067acc, type: 3}
 --- !u!1 &4122994198156835292
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +395,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 35.05, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3124993621710218426}
@@ -445,11 +445,11 @@ MonoBehaviour:
   explosionPerfab: {fileID: 1036410813808012, guid: 1cfa6580d1044aa4788b401d55fd383f,
     type: 3}
   isPlayer: 0
-  maxHp: 500
-  forwardThrustPower: 20
-  yawSpeed: 30
-  pitchSpeed: 30
-  rollSpeed: 10
+  maxHp: 1000
+  forwardThrustPower: 1000
+  yawSpeed: 50
+  pitchSpeed: 50
+  rollSpeed: 50
 --- !u!114 &7644812569188570281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   MoveTargetPos: {x: 0, y: 0, z: 0}
   FireTargetPos: {x: 0, y: 0, z: 0}
   avoiding: 0
-  avoidDistance: 200
+  avoidDistance: 100
   avoidLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -501,7 +501,7 @@ Transform:
   m_GameObject: {fileID: 5908702376635255749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0168, z: -0.4176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -549,7 +549,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -571,9 +571,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0}
-      key1: {r: 1, g: 0, b: 0, a: 1}
-      key2: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0.09019608, g: 0.81568635, b: 0.8196079, a: 0}
+      key1: {r: 0.121568635, g: 0.8078432, b: 0.8117648, a: 1}
+      key2: {r: 0.09019608, g: 0.8196079, b: 0.8196079, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -813,8 +813,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: MGGun
-  shotsPerSecond: 2
-  ordinancePrefab: {fileID: 1310470818994258064, guid: 576242429da410c49a5c7563ec22b1ec,
+  shotsPerSecond: 3
+  ordinancePrefab: {fileID: 1310470818994258064, guid: 12887d2cc045ec5489d814e2da3219d0,
     type: 3}
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.00989693, b: 0, a: 1}
+  m_Color: {r: 0.07058824, g: 0.98823535, b: 0.9960785, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
