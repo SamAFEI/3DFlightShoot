@@ -21,6 +21,10 @@ public class CamaeraManager : MonoBehaviour
         {
             Instance = this;
         }
+        else if (this != Instance)
+        {
+            Destroy(this.gameObject);
+        }
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         firstCamera = transform.Find("FirstCamera").GetComponent<CinemachineVirtualCamera>();
         secondCamera = transform.Find("SecondCamera").GetComponent<CinemachineVirtualCamera>();
@@ -29,11 +33,14 @@ public class CamaeraManager : MonoBehaviour
 
     private void Start()
     {
-        SetActiveCamera();
+        //SetActiveCamera();
     }
 
     private void Update()
     {
+        //可能第一幀為null
+        if (activeCamera == null) { SetActiveCamera(); }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeCamera(1);
@@ -69,6 +76,7 @@ public class CamaeraManager : MonoBehaviour
     public void SetActiveCamera()
     {
         activeCamera = cinemachineBrain.ActiveVirtualCamera as CinemachineVirtualCamera;
+        if (activeCamera == null) return;
         cbmPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cbmPerlin.m_AmplitudeGain = 0f;
         cbmPerlin.m_FrequencyGain = 0f;

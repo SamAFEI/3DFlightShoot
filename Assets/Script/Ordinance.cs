@@ -27,11 +27,11 @@ public class Ordinance : MonoBehaviour
         };
 
         RaycastHit _hit;
-        if (Physics.Raycast(transform.position, rayDirections[0], out _hit, 1f + (velocity * 0.02f)) ||
-            Physics.Raycast(transform.position, rayDirections[1], out _hit, 1f + (velocity * 0.02f)) ||
-            Physics.Raycast(transform.position, rayDirections[2], out _hit, 1f + (velocity * 0.02f)) ||
-            Physics.Raycast(transform.position, rayDirections[3], out _hit, 1f + (velocity * 0.02f)) ||
-            Physics.Raycast(transform.position, rayDirections[4], out _hit, 1f + (velocity * 0.02f)))
+        if (Physics.Raycast(transform.position, rayDirections[0], out _hit, 2f + (velocity * 0.02f)) ||
+            Physics.Raycast(transform.position, rayDirections[1], out _hit, 2f + (velocity * 0.02f)) ||
+            Physics.Raycast(transform.position, rayDirections[2], out _hit, 2f + (velocity * 0.02f)) ||
+            Physics.Raycast(transform.position, rayDirections[3], out _hit, 2f + (velocity * 0.02f)) ||
+            Physics.Raycast(transform.position, rayDirections[4], out _hit, 2f + (velocity * 0.02f)))
         {
             // Get the target (hit) collider
             Collider _target = _hit.collider;
@@ -75,7 +75,8 @@ public class Ordinance : MonoBehaviour
             Destroy(_impact, 1f);
             if (sfxImpact != null)
             {
-                AudioSource.PlayClipAtPoint(sfxImpact, _position);
+                //AudioSource.PlayClipAtPoint(sfxImpact, _position, 1f);
+                AudioManager.PlaySFXOnPoint(sfxImpact, _position, 0.1f);
             }
         }
         Destroy(gameObject);

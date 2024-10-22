@@ -13,16 +13,30 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     public event InputEventVector3 Fire02Event;
     public event InputEventVector3 TurnEvent;
 
-    public LayerMask CursorLayerMask;
+    public LayerMask enemyLayerMask;
     public float deadZoneRadius = 1f;
     public float invertModifier = -1f;
+    public UI_Health uiHealth;
+    public GameObject targetObj;
+    public float lastLocateTime;
+
     private void Awake()
     {
         ShipController = GetComponent<ShipController>();
     }
     void Update()
     {
+        lastLocateTime -= Time.deltaTime;
+        if (lastLocateTime < 0f) 
+        { 
+            targetObj = null; 
+        }
         if (ShipController.IsDie) { return; }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ShipController.CurrentHp = 0;
+            ShipController.Explosion();
+        }
         GetKeyboardInput();
         GetMouseInput();
     }
@@ -33,7 +47,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                ForwardEvent(3);
+                ForwardEvent(2);
             }
             if (Input.GetAxis("Vertical") != 0)
             {
@@ -93,9 +107,21 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         Vector3 targetVector = Camera.main.ScreenToWorldPoint(new Vector3(cursor.x, cursor.y, 1000f));
         Ray ray = Camera.main.ScreenPointToRay(cursor);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, CursorLayerMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyLayerMask))
         {
-            targetVector = hit.point;
+            lastLocateTime = 0.3f;
+            targetObj = hit.collider.transform.root.gameObject;
+        }
+        uiHealth.gameObject.SetActive(false);
+        if (targetObj != null) 
+        {
+            targetVector = targetObj.transform.position;
+            float distance = (targetVector - transform.position).magnitude;
+            float offset = targetObj.GetComponent<Rigidbody>().velocity.magnitude * distance / 1000f;
+            Vector3 velocity = targetObj.GetComponent<Rigidbody>().velocity.normalized * offset;
+            targetVector = targetVector + velocity;
+            uiHealth.gameObject.SetActive(true);
+            uiHealth.SetShip(targetObj.GetComponent<ShipController>());
         }
         return targetVector;
     }

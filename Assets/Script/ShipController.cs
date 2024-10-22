@@ -11,8 +11,11 @@ public class ShipController : MonoBehaviour
     public int CurrentHp { get; set; }
     public bool IsDie { get { return CurrentHp <= 0; } }
 
+    public UI_Canvas uiCanvas { get; private set; }
+    public UI_Health uiHealth { get; private set; }
     public UI_ShipStatus uiShipStatus;
     public GameObject explosionPerfab;
+    public AudioClip explosionClip;
     public bool isPlayer;
     public int maxHp = 500;
     public float forwardThrustPower = 2000f;
@@ -28,14 +31,17 @@ public class ShipController : MonoBehaviour
         if (uiShipStatus == null)
         { uiShipStatus = GetComponentInChildren<UI_ShipStatus>(); }
         ControllerInput = GetComponent<IControllerInput>();
-        ControllerInput.ForwardEvent += ForwardThrust;
-        ControllerInput.HorizontalStrafeEvent += HorizontalStrafeMovement;
-        ControllerInput.VerticalStrafeEvent += VerticalStrafeMovement;
-        ControllerInput.YawEvent += YawMovement;
-        ControllerInput.PitchEvent += PitchMovement;
-        ControllerInput.RollEvent += RollMovement;
-        ControllerInput.TurnEvent += TurnToTarget;
-        ControllerInput.Fire01Event += Fire01Weapon;
+        if (ControllerInput != null)
+        {
+            ControllerInput.ForwardEvent += ForwardThrust;
+            ControllerInput.HorizontalStrafeEvent += HorizontalStrafeMovement;
+            ControllerInput.VerticalStrafeEvent += VerticalStrafeMovement;
+            ControllerInput.YawEvent += YawMovement;
+            ControllerInput.PitchEvent += PitchMovement;
+            ControllerInput.RollEvent += RollMovement;
+            ControllerInput.TurnEvent += TurnToTarget;
+            ControllerInput.Fire01Event += Fire01Weapon;
+        }
         CurrentHp = maxHp;
         isPlayer = GetComponent<PlayerInput>() != null;
     }
@@ -61,7 +67,7 @@ public class ShipController : MonoBehaviour
     }
     private void HorizontalStrafeMovement(float thrust)
     {
-        RB.AddForce(transform.right * thrust * forwardThrustPower * Time.deltaTime);
+        RB.AddForce(transform.right * thrust * forwardThrustPower * 2f * Time.deltaTime);
         SetModelOffsetPosition(thrust);
         SetModelOffsetRotation(thrust);
     }
@@ -121,8 +127,12 @@ public class ShipController : MonoBehaviour
     public void Hurt(Ordinance bullet)
     {
         CurrentHp = (int)Mathf.Clamp(CurrentHp - bullet.armorDamage, 0, maxHp);
-        uiShipStatus.DoLerpHealth();
-        if (isPlayer) { CamaeraManager.Shake(8f, .5f); }
+        if (isPlayer) 
+        { 
+            CamaeraManager.Shake(3f, .5f); 
+            uiShipStatus.DoLerpHealth();
+        }
+        SendMessage("DoLerpHealth", this, SendMessageOptions.DontRequireReceiver);
         if (IsDie)
         {
             if (bullet.parentObj == GameManager.Instance.playerObj)
@@ -137,10 +147,15 @@ public class ShipController : MonoBehaviour
         if (explosionPerfab != null)
         {
             GameObject _explosion = Instantiate(explosionPerfab, transform.position, Quaternion.identity);
+            AudioManager.PlaySFXOnPoint(explosionClip, transform.position, 0.8f);
             Destroy(_explosion, 5f);
         }
         GameManager.RemoveShipList(this.gameObject);
         gameObject.SetActive(false);
+        if (isPlayer)
+        {
+            GameManager.Instance.SetMission(false);
+        }
         Destroy(gameObject, 1f);
     }
 

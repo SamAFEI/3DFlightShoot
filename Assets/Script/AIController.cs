@@ -29,11 +29,21 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     public Vector3 temporaryTarget;
     public Vector3 savedTargetPosition;
 
-    GameObject target = null;
+    public GameObject target = null;
     public LayerMask enemyFactionLayerMask;
     public string enemyFaction = "PlayerFaction";
 
-    private void Start()
+    protected virtual void Start()
+    {
+        InitBehaviors();
+    }
+
+    private void Update()
+    {
+        AIEvaluate();
+    }
+
+    public virtual void InitBehaviors()
     {
         DecideToAttack = new Sequence(new List<BTNode>
         {
@@ -43,17 +53,17 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
         SelectTargetType = new Selector(new List<BTNode>
         {
             DecideToAttack,
-            new FindWanderPointTask(this, 200f)
+            new FindWanderPointTask(this, 150f)
         });
         CheckArrivalSeqence = new Sequence(new List<BTNode>
         {
-            new CheckArrivealTask(this, 80f),
+            new CheckArrivealTask(this, 60f),
             SelectTargetType
         });
         MoveSquence = new Sequence(new List<BTNode>
         {
             new ObstacleAvoidance(this, avoidDistance, TurnEvent, avoidLayerMask),
-            new MoveToTargetTask(this, 40f, ForwardEvent),
+            new MoveToTargetTask(this, 20f, ForwardEvent),
             //new IsTargetVisible(this),  
             //new FireWeaponTask(this, Fire01Event)
         });
@@ -69,10 +79,10 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
             new FireWeaponTask(this, Fire01Event)
         });
 
-        new FindWanderPointTask(this, 200f).Evaluate();
+        new FindWanderPointTask(this, 150f).Evaluate();
     }
 
-    private void Update()
+    public virtual void AIEvaluate()
     {
         rootAI.Evaluate();
         attackAI.Evaluate();

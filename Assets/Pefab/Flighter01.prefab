@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: MGGun
-  shotsPerSecond: 3
+  shotsPerSecond: 2
   ordinancePrefab: {fileID: 1310470818994258064, guid: 12887d2cc045ec5489d814e2da3219d0,
     type: 3}
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
-  sfxFire: {fileID: 8300000, guid: 9776f0badba6d954aba8a29c364eb710, type: 3}
+  sfxFire: {fileID: 8300000, guid: d327e35c5f3d39f43b18b177b46e740d, type: 3}
 --- !u!114 &3461107192164864033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +444,7 @@ MonoBehaviour:
   uiShipStatus: {fileID: 0}
   explosionPerfab: {fileID: 1036410813808012, guid: 1cfa6580d1044aa4788b401d55fd383f,
     type: 3}
+  explosionClip: {fileID: 8300000, guid: 93f154c42f7791441a537ebfebd97f82, type: 3}
   isPlayer: 0
   maxHp: 1000
   forwardThrustPower: 1000
@@ -813,12 +814,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: MGGun
-  shotsPerSecond: 3
+  shotsPerSecond: 2
   ordinancePrefab: {fileID: 1310470818994258064, guid: 12887d2cc045ec5489d814e2da3219d0,
     type: 3}
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
-  sfxFire: {fileID: 8300000, guid: 9776f0badba6d954aba8a29c364eb710, type: 3}
+  sfxFire: {fileID: 8300000, guid: d327e35c5f3d39f43b18b177b46e740d, type: 3}
 --- !u!114 &6446920949663458263
 MonoBehaviour:
   m_ObjectHideFlags: 0

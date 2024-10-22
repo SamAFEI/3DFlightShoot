@@ -3,7 +3,7 @@
 public class Weapon : MonoBehaviour
 {
     public string weaponName = "MGGun";
-    public float shotsPerSecond = 300f;
+    public float shotsPerSecond = 4f;
     public GameObject ordinancePrefab;
     public GameObject muzzleFlashPrefab;
     public WeaponBarrel weaponBarrel; 
@@ -27,7 +27,8 @@ public class Weapon : MonoBehaviour
             projectile.GetComponent<Ordinance>().parentObj = transform.root.gameObject;
             if (sfxFire != null)
             {
-                AudioSource.PlayClipAtPoint(sfxFire, transform.position);
+                //AudioSource.PlayClipAtPoint(sfxFire, transform.position);
+                AudioManager.PlaySFXOnPoint(sfxFire, transform.position, 0.3f);
             }
         }
     }

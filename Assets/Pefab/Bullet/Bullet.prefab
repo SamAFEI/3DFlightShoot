@@ -48,7 +48,7 @@ MonoBehaviour:
   ordinanceName: MGBullet
   parentObj: {fileID: 0}
   velocity: 1000
-  lifeTime: 2
+  lifeTime: 3
   armorDamage: 100
   shieldDamage: 50
   impact: {fileID: 1465047856855714, guid: 333cca4d04210f74dbee99fd8f9b306b, type: 3}

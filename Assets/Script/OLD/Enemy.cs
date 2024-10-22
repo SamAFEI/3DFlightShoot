@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     private void Movement()
     {
         Vector3 targetDir = GameManager.GetPlayerDirection(transform.position);
-        Vector3 playerPos = GameManager.Instance.playerObj.transform.position;
+        Vector3 playerPos = GameManager.Instance.playerPos;
 
         float xyAngle = GetAngleOnPlane(playerPos, transform.position, transform.forward, transform.up);
         float yzAngle = GetAngleOnPlane(playerPos, transform.position, transform.right, transform.forward);

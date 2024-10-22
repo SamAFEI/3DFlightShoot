@@ -11,7 +11,7 @@ public class Scene : MonoBehaviour
     private void Start()
     {
         Spawn();
-        InvokeRepeating("SpawnEnemy", 20f, 30f);
+        //InvokeRepeating("SpawnEnemy", 20f, 30f);
         //InvokeRepeating("SpawnPlayerFaction", 5f, 60f);
     }
 
