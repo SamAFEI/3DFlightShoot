@@ -53,6 +53,9 @@ public class CamaeraManager : MonoBehaviour
         {
             ChangeCamera(3);
         }
+
+        Input.GetKey(KeyCode.Space);
+
         DoShake();
     }
 

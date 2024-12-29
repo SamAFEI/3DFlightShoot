@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class DepotShip : MonoBehaviour
@@ -12,7 +12,7 @@ public class DepotShip : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Rotate(new Vector3(1, 1, 1), 20f * Time.deltaTime, Space.Self);
+        //transform.Rotate(new Vector3(0, 0.5f, 0), 10f * Time.deltaTime, Space.Self);
     }
 
 

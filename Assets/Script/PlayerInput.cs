@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     public event InputEventVector3 Fire02Event;
     public event InputEventVector3 TurnEvent;
 
+    public ParticleSystem WarpDriveFVX;
     public LayerMask enemyLayerMask;
     public float deadZoneRadius = 1f;
     public float invertModifier = -1f;
@@ -43,6 +44,18 @@ public class PlayerInput : MonoBehaviour, IControllerInput
 
     private void GetKeyboardInput()
     {
+
+        if (WarpDriveFVX != null)
+        {
+            if (Input.GetKey(KeyCode.Space) && !WarpDriveFVX.isPlaying)
+            {
+                WarpDriveFVX.Play();
+            }
+            else if (!Input.GetKey(KeyCode.Space) && WarpDriveFVX.isPlaying)
+            {
+                WarpDriveFVX.Stop();
+            }
+        }
         if (ForwardEvent != null)
         {
             if (Input.GetKey(KeyCode.Space))
