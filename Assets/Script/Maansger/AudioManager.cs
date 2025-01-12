@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioSource SFXSource { get; private set; }
 
     public AudioClip bgmClip;
+    public AudioClip noFireSFXClip;
 
     private void Awake()
     {
@@ -46,5 +44,14 @@ public class AudioManager : MonoBehaviour
         audio.volume = volume;
         audio.Play();
         Destroy(obj, clip.length);
+    }
+
+    public static void NoFireSFX()
+    {
+        if (SFXSource.isPlaying) { return; }
+        SFXSource.clip = Instance.noFireSFXClip;
+        SFXSource.loop = false;
+        SFXSource.volume = 0.8f;
+        SFXSource.Play();
     }
 }

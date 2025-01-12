@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -29,6 +29,10 @@ public class IsEnemyInView : BTNode
                     && (enemyFactionLayerMask & (1 << hit.transform.root.gameObject.layer)) != 0)
                 {
                     AI.SetFireTargetPosition(hit.point);
+                    if (hit.collider.tag == "Player")
+                    {
+                        GameManager.BeLocated();
+                    }
                     return BTNodeStates.SUCCESS;
                 }
             }

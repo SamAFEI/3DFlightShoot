@@ -1,6 +1,8 @@
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +19,8 @@ public class GameManager : MonoBehaviour
     public LayerMask enemyFactionLayerMask;
     public LayerMask playerFactionLayerMask;
     public UI_Mission UI_Mission;
-
+    public Image UI_Locked;
+    public float playerBeLoctedTime;
 
     private void Awake()
     {
@@ -33,7 +36,15 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    private void Start()
+    {
+        StartCoroutine(DoFlashLoced());
+    }
 
+    private void Update()
+    {
+        playerBeLoctedTime -= Time.deltaTime;
+    }
     private void LateUpdate()
     {
         if (Instance.playerObj != null)
@@ -54,17 +65,17 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Get ´ÂPlayer¤è¦V¦V¶q
+    /// Get æœPlayeræ–¹å‘å‘é‡
     /// </summary>
     /// <param name="_position"></param>
-    /// <returns> Vector3 ¤è¦V </returns>
+    /// <returns> Vector3 æ–¹å‘ </returns>
     public static Vector3 GetPlayerDirection(Vector3 _position)
     {
         return Instance.playerPos - _position;
     }
 
     /// <summary>
-    /// Get »PPlayerªº¶ZÂ÷
+    /// Get èˆ‡Playerçš„è·é›¢
     /// </summary>
     /// <param name="_position"></param>
     /// <returns></returns>
@@ -108,6 +119,11 @@ public class GameManager : MonoBehaviour
         Instance.kills++;
     }
 
+    public static void BeLocated()
+    {
+        Instance.playerBeLoctedTime = 0.5f;
+    }
+
     public void LoadScene(string _sceneName)
     {
         LoadSceneName = _sceneName;
@@ -120,6 +136,22 @@ public class GameManager : MonoBehaviour
         {
             UI_Mission.gameObject.SetActive(true);
             UI_Mission.SetMissionResult(success);
+        }
+    }
+
+    public IEnumerator DoFlashLoced()
+    {
+        while (true)
+        {
+            while (playerBeLoctedTime > 0)
+            {
+                UI_Locked.color = new Color(UI_Locked.color.r, UI_Locked.color.g, UI_Locked.color.b, 1);
+                yield return null;
+                UI_Locked.color = new Color(UI_Locked.color.r, UI_Locked.color.g, UI_Locked.color.b, 0);
+                yield return null;
+            }
+            UI_Locked.color = new Color(UI_Locked.color.r, UI_Locked.color.g, UI_Locked.color.b, 0);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

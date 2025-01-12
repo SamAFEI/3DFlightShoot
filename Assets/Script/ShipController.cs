@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,19 +9,23 @@ public class ShipController : MonoBehaviour
     public Transform ModelTransform { get; private set; }
     public List<Weapon> Weapons { get; private set; } = new List<Weapon>();
     public int CurrentHp { get; set; }
+    public float CurrentEp { get; set; }
     public bool IsDie { get { return CurrentHp <= 0; } }
 
     public UI_Canvas uiCanvas { get; private set; }
     public UI_Health uiHealth { get; private set; }
+    public UI_Health uiEnergy { get; private set; }
     public UI_ShipStatus uiShipStatus;
     public GameObject explosionPerfab;
     public AudioClip explosionClip;
     public bool isPlayer;
     public int maxHp = 500;
+    public int maxEp = 500;
     public float forwardThrustPower = 2000f;
     public float yawSpeed = 500f;
     public float pitchSpeed = 300f;
     public float rollSpeed = 500f;
+    public bool isRolling;
 
     private void Awake()
     {
@@ -43,6 +47,7 @@ public class ShipController : MonoBehaviour
             ControllerInput.Fire01Event += Fire01Weapon;
         }
         CurrentHp = maxHp;
+        CurrentEp = maxEp;
         isPlayer = GetComponent<PlayerInput>() != null;
     }
 
@@ -50,7 +55,6 @@ public class ShipController : MonoBehaviour
     {
         GameManager.AddShipList(this.gameObject);
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         
@@ -63,13 +67,16 @@ public class ShipController : MonoBehaviour
     #region Movement
     private void ForwardThrust(float thrust)
     {
-        RB.AddForce(transform.forward * thrust * forwardThrustPower * Time.deltaTime);
+        Vector3 power = transform.forward * thrust * forwardThrustPower * Time.deltaTime;
+        RB.AddForce(power);
     }
     private void HorizontalStrafeMovement(float thrust)
     {
         RB.AddForce(transform.right * thrust * forwardThrustPower * 2f * Time.deltaTime);
         SetModelOffsetPosition(thrust);
         SetModelOffsetRotation(thrust);
+        SetUIShipStatusOffsetPosition(thrust);
+        //SetUIShipStatusOffsetRotation(thrust);
     }
     private void VerticalStrafeMovement(float thrust)
     {
@@ -79,6 +86,11 @@ public class ShipController : MonoBehaviour
     {
         RB.AddTorque(transform.up * yaw * yawSpeed * Time.deltaTime);
         SetModelOffsetPosition(-yaw * 6f);
+        SetUIShipStatusOffsetPosition(yaw);
+        if (!isRolling)
+        {
+            SetUIShipStatusOffsetRotation(yaw);
+        }
     }
     private void PitchMovement(float pitch)
     {
@@ -87,6 +99,7 @@ public class ShipController : MonoBehaviour
     private void RollMovement(float roll)
     {
         RB.AddTorque(transform.forward * roll * rollSpeed * Time.deltaTime);
+        SetUIShipStatusOffsetRotation(-roll);
     }
     #endregion
 
@@ -99,6 +112,7 @@ public class ShipController : MonoBehaviour
     }
     private void Fire01Weapon(Vector3 fireTarget)
     {
+        
         if (Weapons.Count > 0)
         {
             foreach (var weapon in Weapons)
@@ -117,13 +131,30 @@ public class ShipController : MonoBehaviour
         float roll = Mathf.Lerp(0, 20, Mathf.Abs(power)) * -Mathf.Sin(power);
         ModelTransform.localRotation = Quaternion.Euler(Vector3.up + Vector3.right + Vector3.forward * roll);
     }
+    public void SetUIShipStatusOffsetPosition(float power)
+    {
+        Vector3 uiStatePos = uiShipStatus.transform.localPosition;
+        float uiStatePosX = Mathf.Lerp(uiStatePos.x, power * 150f, Time.deltaTime);
+        uiShipStatus.transform.localPosition = new Vector3(uiStatePosX, uiStatePos.y, uiStatePos.z);
+    }
+    public void SetUIShipStatusOffsetRotation(float power)
+    {
+        float roll = Mathf.Lerp(0, 20, Mathf.Abs(power)) * -Mathf.Sin(power);
+        uiShipStatus.transform.localRotation = Quaternion.Euler(Vector3.up + Vector3.right + Vector3.forward * roll);
+    }
+    public void SetUIShipStatusOffsetScale(float power)
+    {
+        Vector3 uiStateScale = uiShipStatus.transform.localScale;
+        float scale = Mathf.Lerp(uiStateScale.x, power, Time.deltaTime);
+        scale = Mathf.Clamp(scale, 0.6f, 1.1f);
+        uiShipStatus.transform.localScale = new Vector3(scale, scale, scale);
+    }
     private float GetAngleOnPlane(Vector3 from, Vector3 to, Vector3 planeNormal, Vector3 toOrientation)
     {
         Vector3 vector = Vector3.ProjectOnPlane(from - to, planeNormal);
         float angle = Vector3.SignedAngle(vector, toOrientation, planeNormal);
         return angle;
     }
-
     public void Hurt(Ordinance bullet)
     {
         CurrentHp = (int)Mathf.Clamp(CurrentHp - bullet.armorDamage, 0, maxHp);
@@ -141,6 +172,12 @@ public class ShipController : MonoBehaviour
             }
             Explosion();
         }
+    }
+    public void ConsumeEnergy(float power)
+    {
+        CurrentEp = Mathf.Clamp(CurrentEp - power, 0, maxEp);
+        uiShipStatus.DoLerpEnergy();
+        //SendMessage("DoLerpEnergy", this, SendMessageOptions.DontRequireReceiver);
     }
     public void Explosion()
     {

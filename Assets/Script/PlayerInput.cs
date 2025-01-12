@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerInput : MonoBehaviour, IControllerInput
 {
@@ -19,7 +19,10 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     public float invertModifier = -1f;
     public UI_Health uiHealth;
     public GameObject targetObj;
+    public UI_Slot slot;
     public float lastLocateTime;
+    public float epRechargeTime;
+    public bool isWarpDrive;
 
     private void Awake()
     {
@@ -28,9 +31,14 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     void Update()
     {
         lastLocateTime -= Time.deltaTime;
+        epRechargeTime -= Time.deltaTime;
         if (lastLocateTime < 0f) 
         { 
-            targetObj = null; 
+            targetObj = null;
+        }
+        if (epRechargeTime > 40) //從 5f 扣到負數會變成4X??? 不懂為啥強制給 0
+        {
+            epRechargeTime = 0f;
         }
         if (ShipController.IsDie) { return; }
         if (Input.GetKeyDown(KeyCode.B))
@@ -41,30 +49,56 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         GetKeyboardInput();
         GetMouseInput();
     }
+    private void LateUpdate()
+    {
+        if (epRechargeTime <= 0)
+        {
+            ShipController.ConsumeEnergy(-1f);
+        }
+    }
 
     private void GetKeyboardInput()
     {
-
-        if (WarpDriveFVX != null)
-        {
-            if (Input.GetKey(KeyCode.Space) && !WarpDriveFVX.isPlaying)
-            {
-                WarpDriveFVX.Play();
-            }
-            else if (!Input.GetKey(KeyCode.Space) && WarpDriveFVX.isPlaying)
-            {
-                WarpDriveFVX.Stop();
-            }
-        }
         if (ForwardEvent != null)
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                ForwardEvent(2);
-            }
+            float power = 1; 
             if (Input.GetAxis("Vertical") != 0)
             {
                 ForwardEvent(Input.GetAxis("Vertical"));
+                power = 1 - Input.GetAxis("Vertical") * 0.2f;
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                isWarpDrive = true;
+                ShipController.ConsumeEnergy(0.5f);
+                epRechargeTime = 0.1f;
+                if (ShipController.CurrentEp <= 0)
+                {
+                    AudioManager.NoFireSFX();
+                    isWarpDrive = false;
+                    epRechargeTime = 0.5f;
+                }
+                else
+                {
+                    ForwardEvent(2);
+                    power = 0.6f;
+                }
+            }
+            else 
+            {
+                isWarpDrive = false;
+            }
+            ShipController.SetUIShipStatusOffsetScale(power);
+        }
+        if (WarpDriveFVX != null)
+        {
+            if (isWarpDrive && !WarpDriveFVX.isPlaying)
+            {
+                WarpDriveFVX.Play();
+            }
+            else if (!isWarpDrive && WarpDriveFVX.isPlaying)
+            {
+                WarpDriveFVX.Stop();
             }
         }
         if (HorizontalStrafeEvent != null)
@@ -84,6 +118,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
             {
                 RollEvent(Input.GetAxis("Roll"));
             }
+            ShipController.isRolling = Input.GetAxis("Roll") != 0;
         }
     }
     private void GetMouseInput()
@@ -99,7 +134,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         if (Mathf.Abs(pitch) < deadZoneRadius) pitch = 0.0f;
         if (PitchEvent != null)
         {
-            if (pitch != 0)
+            //if (pitch != 0)
             {
                 PitchEvent(pitch);
             }
@@ -108,6 +143,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
         Vector3 fireVector = CursorDistance(mousePos);
         if (Fire01Event != null)
         {
+            slot.DoFlash(Input.GetMouseButton(0));
             if (Input.GetMouseButton(0))
             {
                 Fire01Event(fireVector);

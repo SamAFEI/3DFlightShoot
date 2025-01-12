@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,13 +6,14 @@ public class UI_ShipStatus : MonoBehaviour
 {
     private RectTransform myRectTransform => GetComponent<RectTransform>();
     public Slider hpSlider { get; private set; }
+    public Slider epSlider;
     public bool isPlayerUI;
     public ShipController shipController;
-    private float hpSmooth;
+    private float hpSmooth, epSmooth;
 
     private void Awake()
     {
-        hpSlider = transform.Find("UI_Health").GetComponent<Slider>();
+        hpSlider = transform.Find("UI_Health").GetComponent<Slider>(); ;
     }
 
     private void Start()
@@ -22,6 +23,12 @@ public class UI_ShipStatus : MonoBehaviour
         hpSlider.maxValue = shipController.maxHp;
         hpSlider.value = hpSlider.maxValue;
         hpSlider.gameObject.SetActive(isPlayerUI);
+        if (epSlider != null )
+        {
+            epSlider.maxValue = shipController.maxEp;
+            epSlider.value = epSlider.maxValue;
+            epSlider.gameObject.SetActive(isPlayerUI);
+        }
     }
 
     private void Update()
@@ -50,8 +57,30 @@ public class UI_ShipStatus : MonoBehaviour
         hpSlider.gameObject.SetActive(isPlayerUI);
     }
 
+    public void DoLerpEnergy()
+    {
+        if (epSlider == null) return;
+        epSmooth = 0;
+        StartCoroutine(LerpEnergy());
+    }
+
+    private IEnumerator LerpEnergy()
+    {
+        float smooth = 50;
+        float startEP = epSlider.value;
+        while (epSmooth < 1)
+        {
+            epSlider.gameObject.SetActive(true);
+            epSmooth += Time.deltaTime * smooth;
+            epSlider.value = Mathf.Lerp(startEP, shipController.CurrentEp, epSmooth);
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f);
+        epSlider.gameObject.SetActive(isPlayerUI);
+    }
+
     /// <summary>
-    /// ≠±¶VCamera
+    /// Èù¢ÂêëCamera
     /// </summary>
     protected void DoBillboard()
     {

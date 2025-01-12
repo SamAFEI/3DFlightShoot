@@ -8,17 +8,16 @@ public class Weapon : MonoBehaviour
     public GameObject muzzleFlashPrefab;
     public WeaponBarrel weaponBarrel; 
     public AudioClip sfxFire;
-    float coolDownTimer = 0;
+    float coolDownTimer = 0; 
 
     private void Start()
     {
         weaponBarrel = GetComponentInChildren<WeaponBarrel>();
     }
 
-    public void Fire(Vector3 targetVector)
+    public bool Fire(Vector3 targetVector)
     {
         float coolDownRate = 1f / shotsPerSecond;
-
         if (coolDownTimer < Time.time)
         {
             coolDownTimer = Time.time + coolDownRate;
@@ -30,6 +29,8 @@ public class Weapon : MonoBehaviour
                 //AudioSource.PlayClipAtPoint(sfxFire, transform.position);
                 AudioManager.PlaySFXOnPoint(sfxFire, transform.position, 0.3f);
             }
+            return true;
         }
+        return false;
     }
 }

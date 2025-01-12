@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
@@ -20,7 +20,7 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
     public Selector rootAI;
     public Sequence CheckArrivalSeqence;
     public Sequence MoveSquence;
-    public Sequence DecideToAttack;
+    public Sequence DecideTarget;
     public Selector SelectTargetType;
     public Sequence attackAI;
     public bool avoiding;
@@ -45,14 +45,14 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
 
     public virtual void InitBehaviors()
     {
-        DecideToAttack = new Sequence(new List<BTNode>
+        DecideTarget = new Sequence(new List<BTNode>
         {
             new RandomChanceConditionalTask(1, 100, 50),
             new FindNewTargetTask(this, enemyFaction)
         });
         SelectTargetType = new Selector(new List<BTNode>
         {
-            DecideToAttack,
+            DecideTarget,
             new FindWanderPointTask(this, 150f)
         });
         CheckArrivalSeqence = new Sequence(new List<BTNode>
@@ -72,7 +72,6 @@ public class AIController : MonoBehaviour, IControllerInput, IBehaviorAI
             CheckArrivalSeqence,
             MoveSquence
         });
-
         attackAI = new Sequence(new List<BTNode>
         {
             new IsEnemyInView(this, enemyFactionLayerMask),

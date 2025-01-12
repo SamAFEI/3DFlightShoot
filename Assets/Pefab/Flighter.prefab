@@ -80,10 +80,12 @@ MonoBehaviour:
   explosionClip: {fileID: 8300000, guid: 93f154c42f7791441a537ebfebd97f82, type: 3}
   isPlayer: 1
   maxHp: 4000
+  maxEp: 600
   forwardThrustPower: 2000
   yawSpeed: 800
   pitchSpeed: 600
   rollSpeed: 800
+  isRolling: 0
 --- !u!114 &6456425286385299356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95160c11d98b974d9537c70559c65ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WarpDriveFVX: {fileID: 0}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -103,7 +106,10 @@ MonoBehaviour:
   invertModifier: -1
   uiHealth: {fileID: 0}
   targetObj: {fileID: 0}
+  slot: {fileID: 0}
   lastLocateTime: 0
+  epRechargeTime: 0
+  isWarpDrive: 0
 --- !u!1 &2767195528851859289
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,9 +570,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.09019608, g: 0.98823535, b: 0.9960785, a: 0}
+      key0: {r: 0.09019608, g: 0.98823535, b: 0.9960785, a: 1}
       key1: {r: 0.08627451, g: 0.9333334, b: 0.94117653, a: 1}
-      key2: {r: 0.21568629, g: 0.80392164, b: 0.8078432, a: 1}
+      key2: {r: 0.21568629, g: 0.80392164, b: 0.8078432, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -581,8 +587,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 6554
-      atime2: 52428
+      atime1: 52428
+      atime2: 65535
       atime3: 65535
       atime4: 0
       atime5: 0
@@ -591,7 +597,7 @@ TrailRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 3
-      m_NumAlphaKeys: 4
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -696,6 +702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80c745e1d59f06c408cb5f45b5067acc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
