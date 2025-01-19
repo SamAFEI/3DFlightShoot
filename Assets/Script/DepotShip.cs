@@ -22,9 +22,9 @@ public class DepotShip : MonoBehaviour
         while (true)
         {
             Vector3 vector = transform.position + (transform.forward * 10);
-            GameObject obj = Instantiate(enemyPerfab, vector, Quaternion.identity);
+            GameObject obj = Instantiate(enemyPerfab, vector, Quaternion.LookRotation(transform.forward));
             obj.GetComponent<Rigidbody>().AddRelativeForce(obj.transform.forward * 500f, ForceMode.Impulse);
-            yield return new WaitForSecondsRealtime(10f);
+            yield return new WaitForSecondsRealtime(20f);
         }
     }
 }

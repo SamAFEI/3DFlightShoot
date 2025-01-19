@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator DoFlashLoced()
     {
+        if (UI_Locked == null) yield break; ;
         while (true)
         {
             while (playerBeLoctedTime > 0)

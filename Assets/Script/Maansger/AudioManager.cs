@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip bgmClip;
     public AudioClip noFireSFXClip;
+    public AudioClip noEPSFXClip;
 
     private void Awake()
     {
@@ -50,6 +51,14 @@ public class AudioManager : MonoBehaviour
     {
         if (SFXSource.isPlaying) { return; }
         SFXSource.clip = Instance.noFireSFXClip;
+        SFXSource.loop = false;
+        SFXSource.volume = 0.8f;
+        SFXSource.Play();
+    }
+    public static void NoEPSFX()
+    {
+        if (SFXSource.isPlaying) { return; }
+        SFXSource.clip = Instance.noEPSFXClip;
         SFXSource.loop = false;
         SFXSource.volume = 0.8f;
         SFXSource.Play();

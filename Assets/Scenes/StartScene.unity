@@ -454,16 +454,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -524,11 +514,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -623,11 +608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739b9c9ff005c8746ae0ce1aa009e8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  shipController: {fileID: 0}
-  targetObj: {fileID: 0}
 --- !u!1 &211200830
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,16 +824,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -914,11 +884,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1292,16 +1257,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1362,11 +1317,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1384,16 +1334,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy02 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
@@ -1455,11 +1395,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2736,11 +2671,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flighter01 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 4122994198156835292, guid: a7d105514917af849a8bdd77d57889db,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2810,6 +2740,124 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 0}
   weaponBarrel: {fileID: 0}
   sfxFire: {fileID: 8300000, guid: 9776f0badba6d954aba8a29c364eb710, type: 3}
+--- !u!1 &1212395492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1212395493}
+  - component: {fileID: 1212395495}
+  - component: {fileID: 1212395494}
+  m_Layer: 6
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1212395493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212395492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.446, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1406070971}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1212395494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212395492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1212395495
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212395492}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0
+  m_Range: 5
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1256268387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5dfec6d52ca974c8a9fabb9cac399b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  epSlider: {fileID: 0}
+  bulletsSlider: {fileID: 0}
   isPlayerUI: 1
   shipController: {fileID: 382334784}
 --- !u!1001 &1304294375
@@ -3264,6 +3314,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73118d6d5faf71249b360315a7879df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1406070971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3124993621710218426, guid: a7d105514917af849a8bdd77d57889db,
+    type: 3}
+  m_PrefabInstance: {fileID: 7518514625838784159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1554365610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3276,16 +3332,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy02 (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
@@ -3347,11 +3393,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3603,6 +3644,124 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: 4e52b966203591744ab03512ffca043c, type: 3}
+--- !u!1 &1624747204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624747205}
+  - component: {fileID: 1624747207}
+  - component: {fileID: 1624747206}
+  m_Layer: 6
+  m_Name: Spot Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624747205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624747204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2.292, z: 0.003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1406070971}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1624747206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624747204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1624747207
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624747204}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1000
+  m_Range: 50
+  m_SpotAngle: 45.23545
+  m_InnerSpotAngle: 40.92056
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1656007562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,16 +4043,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3954,11 +4103,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3972,16 +4116,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 741911728965053905, guid: a7d105514917af849a8bdd77d57889db,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 741911728965053905, guid: a7d105514917af849a8bdd77d57889db,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2426772203406427450, guid: a7d105514917af849a8bdd77d57889db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4046,11 +4180,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Flighter01 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4122994198156835292, guid: a7d105514917af849a8bdd77d57889db,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4206,16 +4335,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4276,11 +4395,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4377,16 +4491,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4447,11 +4551,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4559,16 +4658,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02 (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4629,11 +4718,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4719,10 +4803,13 @@ MonoBehaviour:
   explosionClip: {fileID: 0}
   isPlayer: 0
   maxHp: 4000
+  maxEp: 500
+  maxBullets: 500
   forwardThrustPower: 2000
   yawSpeed: 800
   pitchSpeed: 800
   rollSpeed: 800
+  isRolling: 0
 --- !u!114 &2011496015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4735,6 +4822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95160c11d98b974d9537c70559c65ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WarpDriveFVX: {fileID: 0}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -4742,7 +4830,14 @@ MonoBehaviour:
   invertModifier: -1
   uiHealth: {fileID: 0}
   targetObj: {fileID: 0}
+  slot: {fileID: 0}
+  tmpDistance: {fileID: 0}
   lastLocateTime: 0
+  epRechargeTime: 0
+  lastFireTime: 0
+  isWarpDrive: 0
+  FX_Flames: {fileID: 0}
+  FX_FlamesBig: {fileID: 0}
 --- !u!1 &2130955013
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,16 +4985,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy02
       objectReference: {fileID: 0}
-    - target: {fileID: 2957029797441023216, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026502134741098327, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: enemyFactionLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4212134874105628251, guid: 89e80ad36156d614c931652825fadf0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4960,11 +5045,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4596454711717148961, guid: 89e80ad36156d614c931652825fadf0c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5649,14 +5729,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flighter01
       objectReference: {fileID: 0}
-    - target: {fileID: 4122994198156835292, guid: a7d105514917af849a8bdd77d57889db,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3124993621710218426, guid: a7d105514917af849a8bdd77d57889db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1212395493}
+    - targetCorrespondingSourceObject: {fileID: 3124993621710218426, guid: a7d105514917af849a8bdd77d57889db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1624747205}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d105514917af849a8bdd77d57889db, type: 3}
 --- !u!4 &7518514625838784160 stripped

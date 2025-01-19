@@ -10,6 +10,7 @@ public class ShipController : MonoBehaviour
     public List<Weapon> Weapons { get; private set; } = new List<Weapon>();
     public int CurrentHp { get; set; }
     public float CurrentEp { get; set; }
+    public float CurrentBullets { get; set; }
     public bool IsDie { get { return CurrentHp <= 0; } }
 
     public UI_Canvas uiCanvas { get; private set; }
@@ -21,6 +22,7 @@ public class ShipController : MonoBehaviour
     public bool isPlayer;
     public int maxHp = 500;
     public int maxEp = 500;
+    public int maxBullets = 500;
     public float forwardThrustPower = 2000f;
     public float yawSpeed = 500f;
     public float pitchSpeed = 300f;
@@ -48,6 +50,7 @@ public class ShipController : MonoBehaviour
         }
         CurrentHp = maxHp;
         CurrentEp = maxEp;
+        CurrentBullets = maxBullets;
         isPlayer = GetComponent<PlayerInput>() != null;
     }
 
@@ -57,7 +60,6 @@ public class ShipController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
         RB.velocity = Vector3.zero;
         Vector3 vector = transform.position - collision.collider.ClosestPoint(transform.position);
         vector = vector.normalized;
@@ -178,6 +180,11 @@ public class ShipController : MonoBehaviour
         CurrentEp = Mathf.Clamp(CurrentEp - power, 0, maxEp);
         uiShipStatus.DoLerpEnergy();
         //SendMessage("DoLerpEnergy", this, SendMessageOptions.DontRequireReceiver);
+    }
+    public void ConsumeBullets(float amount)
+    {
+        CurrentBullets = Mathf.Clamp(CurrentBullets - amount, 0, maxEp);
+        uiShipStatus.DoLerpBullets();
     }
     public void Explosion()
     {

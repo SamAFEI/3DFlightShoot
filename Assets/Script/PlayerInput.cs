@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class PlayerInput : MonoBehaviour, IControllerInput
 {
@@ -20,9 +21,13 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     public UI_Health uiHealth;
     public GameObject targetObj;
     public UI_Slot slot;
+    public TextMeshProUGUI tmpDistance;
     public float lastLocateTime;
     public float epRechargeTime;
+    public float lastFireTime;
     public bool isWarpDrive;
+    public ParticleSystem FX_Flames;
+    public ParticleSystem FX_FlamesBig;
 
     private void Awake()
     {
@@ -32,13 +37,10 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     {
         lastLocateTime -= Time.deltaTime;
         epRechargeTime -= Time.deltaTime;
+        lastFireTime -= Time.deltaTime;
         if (lastLocateTime < 0f) 
         { 
             targetObj = null;
-        }
-        if (epRechargeTime > 40) //從 5f 扣到負數會變成4X??? 不懂為啥強制給 0
-        {
-            epRechargeTime = 0f;
         }
         if (ShipController.IsDie) { return; }
         if (Input.GetKeyDown(KeyCode.B))
@@ -53,7 +55,11 @@ public class PlayerInput : MonoBehaviour, IControllerInput
     {
         if (epRechargeTime <= 0)
         {
-            ShipController.ConsumeEnergy(-1f);
+            ShipController.ConsumeEnergy(-3f);
+        }
+        if (lastFireTime <= 0)
+        {
+            ShipController.ConsumeBullets(-3f);
         }
     }
 
@@ -74,7 +80,7 @@ public class PlayerInput : MonoBehaviour, IControllerInput
                 epRechargeTime = 0.1f;
                 if (ShipController.CurrentEp <= 0)
                 {
-                    AudioManager.NoFireSFX();
+                    AudioManager.NoEPSFX();
                     isWarpDrive = false;
                     epRechargeTime = 0.5f;
                 }
@@ -88,6 +94,21 @@ public class PlayerInput : MonoBehaviour, IControllerInput
             {
                 isWarpDrive = false;
             }
+            if (power == 0.6f)
+            {
+                FX_Flames.Stop();
+                FX_FlamesBig.Play();
+            }
+            else if (power == 0.8f)
+            {
+                FX_Flames.Play();
+                FX_FlamesBig.Stop();
+            }
+            else
+            {
+                FX_Flames.Stop();
+                FX_FlamesBig.Stop();
+            } 
             ShipController.SetUIShipStatusOffsetScale(power);
         }
         if (WarpDriveFVX != null)
@@ -146,14 +167,26 @@ public class PlayerInput : MonoBehaviour, IControllerInput
             slot.DoFlash(Input.GetMouseButton(0));
             if (Input.GetMouseButton(0))
             {
-                Fire01Event(fireVector);
+                ShipController.ConsumeBullets(0.5f);
+                lastFireTime = 0.1f;
+                if (ShipController.CurrentBullets <= 0)
+                {
+                    AudioManager.NoFireSFX();
+                    lastFireTime = 0.5f;
+                }
+                else
+                {
+                    Fire01Event(fireVector);
+                }
             }
+            
         }
     }
 
     private Vector3 CursorDistance(Vector2 cursor)
     {
-        Vector3 targetVector = Camera.main.ScreenToWorldPoint(new Vector3(cursor.x, cursor.y, 1000f));
+        Vector3 cursorVector = Camera.main.ScreenToWorldPoint(new Vector3(cursor.x, cursor.y, 1000f));
+        Vector3 targetVector = cursorVector;
         Ray ray = Camera.main.ScreenPointToRay(cursor);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyLayerMask))
@@ -162,15 +195,37 @@ public class PlayerInput : MonoBehaviour, IControllerInput
             targetObj = hit.collider.transform.root.gameObject;
         }
         uiHealth.gameObject.SetActive(false);
+        tmpDistance.gameObject.SetActive(false);
         if (targetObj != null) 
         {
+            float offset;
+            Vector3 velocity;
             targetVector = targetObj.transform.position;
-            float distance = (targetVector - transform.position).magnitude;
-            float offset = targetObj.GetComponent<Rigidbody>().velocity.magnitude * distance / 1000f;
-            Vector3 velocity = targetObj.GetComponent<Rigidbody>().velocity.normalized * offset;
-            targetVector = targetVector + velocity;
+            float distance = (targetVector - transform.position).magnitude; 
+            distance = (int)distance;
+            float scale = 1;
+            tmpDistance.text = distance.ToString();
+            tmpDistance.gameObject.SetActive(true);
+            if (distance >= 400)
+            {
+                offset = distance / 100f;
+                //if (offset == 0) { offset = distance / 300f; offset *= offset; }
+                offset *= Random.Range(-2.0f, 2.0f);
+                velocity = cursorVector.normalized * offset;
+                targetVector = cursorVector + velocity;
+                return targetVector; 
+            }
+            else
+            {
+                offset = targetObj.GetComponent<Rigidbody>().velocity.magnitude * distance / 1000f;
+                velocity = targetObj.GetComponent<Rigidbody>().velocity.normalized * offset;
+                targetVector = targetVector + velocity;
+            }
+            scale = Mathf.Clamp(1 - 0.0025f * (distance - 200), 0.5f, 1f); //ChatGPT 算的
+            uiHealth.gameObject.transform.localScale = Vector3.one * scale;
             uiHealth.gameObject.SetActive(true);
             uiHealth.SetShip(targetObj.GetComponent<ShipController>());
+            
         }
         return targetVector;
     }

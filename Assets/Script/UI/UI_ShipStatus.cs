@@ -7,9 +7,10 @@ public class UI_ShipStatus : MonoBehaviour
     private RectTransform myRectTransform => GetComponent<RectTransform>();
     public Slider hpSlider { get; private set; }
     public Slider epSlider;
+    public Slider bulletsSlider;
     public bool isPlayerUI;
     public ShipController shipController;
-    private float hpSmooth, epSmooth;
+    private float hpSmooth, epSmooth, bulletsSmooth;
 
     private void Awake()
     {
@@ -28,6 +29,12 @@ public class UI_ShipStatus : MonoBehaviour
             epSlider.maxValue = shipController.maxEp;
             epSlider.value = epSlider.maxValue;
             epSlider.gameObject.SetActive(isPlayerUI);
+        }
+        if (bulletsSlider != null)
+        {
+            bulletsSlider.maxValue = shipController.maxBullets;
+            bulletsSlider.value = bulletsSlider.maxValue;
+            bulletsSlider.gameObject.SetActive(isPlayerUI);
         }
     }
 
@@ -78,6 +85,29 @@ public class UI_ShipStatus : MonoBehaviour
         yield return new WaitForSeconds(2f);
         epSlider.gameObject.SetActive(isPlayerUI);
     }
+
+    public void DoLerpBullets()
+    {
+        if (bulletsSlider == null) return;
+        bulletsSmooth = 0;
+        StartCoroutine(LerpBullets());
+    }
+
+    private IEnumerator LerpBullets()
+    {
+        float smooth = 50;
+        float startBullets = bulletsSlider.value;
+        while (bulletsSmooth < 1)
+        {
+            bulletsSlider.gameObject.SetActive(true);
+            bulletsSmooth += Time.deltaTime * smooth;
+            bulletsSlider.value = Mathf.Lerp(startBullets, shipController.CurrentBullets, bulletsSmooth);
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f);
+        epSlider.gameObject.SetActive(isPlayerUI);
+    }
+
 
     /// <summary>
     /// 面向Camera

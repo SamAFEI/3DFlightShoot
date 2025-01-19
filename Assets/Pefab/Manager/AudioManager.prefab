@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClip: {fileID: 8300000, guid: f1eda05fff2a9f94d9bfbd16fab7aa19, type: 3}
+  noFireSFXClip: {fileID: 8300000, guid: 7698663b204945842951d9244b4d7d6b, type: 3}
+  noEPSFXClip: {fileID: 8300000, guid: dd160fbc8fcf08f49acac0f2a65efbe2, type: 3}
 --- !u!1 &9187372934800801919
 GameObject:
   m_ObjectHideFlags: 0
